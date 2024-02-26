@@ -8,6 +8,7 @@ extern crate wasm_bindgen_test;
 use wasm_bindgen_test::{console_log, *};
 use fingerprint_wasm::encrypt_mod::{encrypt, decrypt};
 use fingerprint_wasm::session_mod::make_fingerprint;
+use web_sys::js_sys::Math::random;
 
 wasm_bindgen_test_configure!(run_in_browser);
 
@@ -25,14 +26,21 @@ fn test_encrypt_decrypt() {
     assert_eq!(data, decrypted);
 }
 
-// #[wasm_bindgen_test]
-// fn test_encrypt_decrypt2() {
-//     let data = "helloJGAKS#&@*@HJworld";
-//     let secret = "12jdsdsjVNSKSKS3456";
-//     let encrypted = encrypt(data, secret);
-//     let decrypted = decrypt(&encrypted, secret);
-//     assert_eq!(data, decrypted);
-// }
+#[wasm_bindgen_test]
+fn test_encrypt_decrypt2() {
+    let data = "helloJGAKS#&@*@HJworld";
+    let secret = "12jdsdsjVNSKSKS3456";
+    let encrypted = encrypt(data, secret);
+    let edit_random_char_encrypted = encrypted.chars().enumerate().map(|(i, c)| {
+        if i == 5 {
+            'A'
+        } else {
+            c
+        }
+    }).collect::<String>();
+    let decrypted = decrypt(&edit_random_char_encrypted, secret);
+    assert_ne!(data, decrypted);
+}
 
 #[wasm_bindgen_test]
 fn test_make_fingerprint() {
