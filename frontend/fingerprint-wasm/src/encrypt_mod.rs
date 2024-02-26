@@ -63,30 +63,6 @@ pub fn encrypt(data: &str, secret: &str) -> String {
     format!("{}{:08X}", encrypted_data, checksum)
 }
 
-// pub fn decrypt(encrypted_data_with_checksum: &str, secret: &str) -> String {
-//     if encrypted_data_with_checksum.len() < 9 {
-//         return "not enough data".to_string();
-//     }
-
-//     let encrypted_data = &encrypted_data_with_checksum[..encrypted_data_with_checksum.len() - 8];
-//     let checksum_str = &encrypted_data_with_checksum[encrypted_data_with_checksum.len() - 8..];
-//     let checksum_result = u32::from_str_radix(checksum_str, 16);
-
-//     let checksum = match checksum_result {
-//         Ok(value) => value,
-//         Err(_) => return "invalid".to_string(),
-//     };
-
-//     let decrypted_data = decrypt_vigenere(encrypted_data, secret);
-
-//     let calculated_checksum = calculate_checksum(encrypted_data);
-//     if calculated_checksum == checksum {
-//         decrypted_data
-//     } else {
-//         "mismatch".to_string()
-//     }
-// }
-
 pub fn decrypt(encrypted_data_with_checksum: &str, secret: &str) -> Result<String, String> {
     if encrypted_data_with_checksum.len() < 9 {
         return Err("not enough data".to_string());
