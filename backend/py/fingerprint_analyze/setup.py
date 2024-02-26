@@ -6,7 +6,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setuptools.setup(
     name="fingerprint_analyze",
-    version="0.1.0",
+    version="0.1.2",
     author="Fuhao",
     author_email="fangshiyu2@gmail.com",
     description="A package for detecting the session fingerprint",
