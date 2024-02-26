@@ -9,13 +9,13 @@ mod utils;
 pub mod session_mod;
 
 use encrypt_mod::encrypt;
-use session_mod::make_fingerprint;
+use session_mod::make_canvas_fingerprint;
 use wasm_bindgen::prelude::*;
 
 
 #[wasm_bindgen]
 pub fn get_request_session(secret: &str) -> String {
-    let fingerprint = make_fingerprint().unwrap();
+    let fingerprint = make_canvas_fingerprint().unwrap();
     let encrypted = encrypt(&fingerprint, secret);
     encrypted
 }

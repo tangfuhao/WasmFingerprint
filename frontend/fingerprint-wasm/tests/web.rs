@@ -9,7 +9,7 @@ use std::assert;
 
 use wasm_bindgen_test::{console_log, *};
 use fingerprint_wasm::encrypt_mod::{encrypt, decrypt};
-use fingerprint_wasm::session_mod::make_fingerprint;
+use fingerprint_wasm::session_mod::make_canvas_fingerprint;
 use web_sys::js_sys::Math::random;
 
 wasm_bindgen_test_configure!(run_in_browser);
@@ -45,9 +45,9 @@ fn test_encrypt_decrypt2() {
 }
 
 #[wasm_bindgen_test]
-fn test_make_fingerprint() {
-    let fingerprint1 = make_fingerprint();
-    let fingerprint2 = make_fingerprint();
+fn test_make_canvas_fingerprint() {
+    let fingerprint1 = make_canvas_fingerprint();
+    let fingerprint2 = make_canvas_fingerprint();
 
     assert_eq!(fingerprint1, fingerprint2);
 }

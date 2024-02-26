@@ -29,9 +29,28 @@ fn create_canvas_with_text() -> Result<HtmlCanvasElement, JsValue> {
         .ok_or_else(|| JsValue::from_str("Failed to get 2d context"))?
         .dyn_into::<CanvasRenderingContext2d>()?;
 
-    context.begin_path();
-    context.fill_style();
+    // 设置字体样式
+    context.set_font("30px Arial");
+    context.set_fill_style(&JsValue::from_str("red"));
     context.fill_text("❤️🤪🎉👋", 50.0, 70.0)?;
+
+    // 在不同位置绘制多行文本
+    context.set_font("20px Arial");
+    context.set_fill_style(&JsValue::from_str("blue"));
+    context.fill_text("🌟🍕🦄🔥", 80.0, 120.0)?;
+
+    // 绘制一个矩形
+    context.set_fill_style(&JsValue::from_str("green"));
+    context.fill_rect(150.0, 50.0, 100.0, 50.0);
+
+
+
+    // 绘制一条线
+    context.begin_path();
+    context.move_to(50.0, 200.0);
+    context.line_to(250.0, 200.0);
+    context.set_stroke_style(&JsValue::from_str("purple"));
+    context.set_line_width(5.0);
     context.stroke();
 
     Ok(canvas)
@@ -43,7 +62,7 @@ fn calculate_crc32_checksum(data_url: &str) -> u32 {
     digest.sum32()
 }
 
-pub fn make_fingerprint() -> Result<String, JsValue> {
+pub fn make_canvas_fingerprint() -> Result<String, JsValue> {
     // let performance = performance()?;
 
     // let start_time = performance.now();
