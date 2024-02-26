@@ -9,3 +9,11 @@ if __name__ == "__main__":
         print(session)
     except ValueError as e:
         print(e)
+        
+    content1 = "I48O36G2000001E6"
+    secret1 = "hello"
+    try:
+        session = fingerprint_analyzer.decrypt(content1, secret1)
+        print(session)
+    except ValueError as e:
+        print(e)
